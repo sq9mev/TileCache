@@ -61,7 +61,7 @@ class Image(MetaLayer):
         sub = sub.resize(size, scaling)
 
         buffer = StringIO.StringIO()
-        if self.image.info.has_key('transparency'):
+        if self.image.info.has_key('transparency') and isinstance(self.image.info['transparency'], int):
             sub.save(buffer, self.extension, transparency=self.image.info['transparency'])
         else:
             sub.save(buffer, self.extension)

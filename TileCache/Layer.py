@@ -431,7 +431,7 @@ class MetaLayer (Layer):
                 miny = maxy - self.size[1]
                 subimage = image.crop((minx, miny, maxx, maxy))
                 buffer = StringIO.StringIO()
-                if image.info.has_key('transparency'): 
+                if image.info.has_key('transparency') and isinstance(image.info['transparency'], int):
                     subimage.save(buffer, self.extension, transparency=image.info['transparency'])
                 else:
                     subimage.save(buffer, self.extension)
@@ -485,7 +485,7 @@ class MetaLayer (Layer):
         watermarkedImage.paste(wmark, (0,0))
         watermarkedImage = Image.composite(watermarkedImage, tileImage, watermarkedImage)
         buffer = StringIO.StringIO()
-        if watermarkedImage.info.has_key('transparency'):
+        if watermarkedImage.info.has_key('transparency') and isinstance(watermarkedImage.info['transparency'], int):
             watermarkedImage.save(buffer, self.extension, transparency=compositeImage.info['transparency'])
         else:
             watermarkedImage.save(buffer, self.extension)
